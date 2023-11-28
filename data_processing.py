@@ -210,7 +210,6 @@ my_avg_1 = my_table5.filter(lambda x: x['class'] == '1').aggregate(lambda x: sum
 my_avg_2 = my_table5.filter(lambda x: x['class'] == '3').aggregate(lambda x: sum(x)/len(x), 'fare')
 print("First class:", my_avg_1, "Third class:", my_avg_2)
 
-# Pivot table test
 my_pivot = my_table5.pivot_table(['embarked', 'gender', 'class'], ['fare', 'fare', 'fare', 'last'], [lambda x: min(x), lambda x: max(x), lambda x: sum(x)/len(x), lambda x: len(x)])
 print(my_pivot)
 
@@ -223,3 +222,8 @@ print(my_pivot)
 
 my_pivot = my_table5.pivot_table(['class', 'gender', 'survived'], ['survived', 'fare'], [lambda x: len(x), lambda x: sum(x)/len(x)])
 print(my_pivot)
+
+# Find the total number of male passengers embarked at Southampton
+my_filtered_table = my_table5.filter(lambda x: x['embarked'] == 'Southampton' and x['gender'] == 'M')
+print("Total number is", len(my_filtered_table.table))
+
